@@ -1,11 +1,13 @@
 """
-Use turtle to draw
 Frank Cwitkowitz
-12/27/2015
+
+Created: 12/27/2015
+Revised: 12/22/2018
+
+Utilities for my graphic designs. Mostly just common functions for drawing.
 """
 
-import turtle
-
+from turtle import *
 
 def init():
     """

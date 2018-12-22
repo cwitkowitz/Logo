@@ -1,6 +1,14 @@
+"""
+Frank Cwitkowitz
+
+Created: Unknown - Sometime during late 2018
+Revised: 12/22/2018
+
+Functions to draw my logo with letters.
+"""
+
 from turtle import *
 from math import *
-
 
 """
 Outer function that will handle
