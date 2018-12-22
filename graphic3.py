@@ -15,16 +15,22 @@ I am not complaining. I'll get em' next time.
 #####################
 """
 
+from utils import *
+
 from turtle import *
 from math import *
 
+PEN_COLOR = '#000000'
+BG_COLOR  = '#FFFFFF'
+WIN_SIZE  = 300
 
 """
 Outer function that will handle
 each piece of the project altogether.
 """
 def main(height, windowXSize):
-    init(windowXSize)
+    graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
+    left(90)
 
     # These should begin with the
     # turtle up, centered and facing up.
@@ -44,7 +50,7 @@ def main(height, windowXSize):
     right(90)
     """
 
-    deInit()
+    graphicFin()
 
 
 """
@@ -69,28 +75,6 @@ def drawThickenedCircle(radius, extent, thickness):
     circle(radius, extent)
     up()
     pensize(1)
-
-
-"""
-Function that sets up the project.
-"""
-def init(windowXSize):
-    setup(windowXSize, (windowXSize * 1.5), None, None)
-    speed(0)
-    pencolor('black')
-    up()
-    left(90)
-
-
-"""
-Function that handles the closing
-cleanup of the project.
-"""
-def deInit():
-    up()
-    forward(1000)
-    input("Press ENTER to quit.")
-    bye()
 
 
 ##########################################################################################

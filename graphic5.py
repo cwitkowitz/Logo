@@ -7,16 +7,22 @@ Revised: 12/22/2018
 The fifth graphic.
 """
 
+from utils import *
+
 from turtle import *
 from math import *
 
+PEN_COLOR = '#000000'
+BG_COLOR  = '#FFFFFF'
+WIN_SIZE  = 300
 
 """
 Outer function that will handle
 each piece of the project altogether.
 """
 def main(windowXSize):
-    init(windowXSize)
+    graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
+    left(90)
 
     """
     This parameter will change the length of the
@@ -24,14 +30,12 @@ def main(windowXSize):
     """
     scale = 20
 
-    bgcolor('#C1C0CC')
-
     for i in range(0, 4):
         squareCorners(scale)
         left(90)
         bars(scale)
 
-    deInit()
+    graphicFin()
 
 
 """
@@ -56,29 +60,6 @@ def drawThickenedCircle(radius, extent, thickness):
     circle(radius, extent)
     up()
     pensize(1)
-
-
-"""
-Function that sets up the project.
-"""
-def init(windowXSize):
-    setup((windowXSize * 1.5), windowXSize, None, None)
-    speed(3)
-    pencolor('black')
-    up()
-    left(90)
-
-
-"""
-Function that handles the closing
-cleanup of the project.
-"""
-def deInit():
-    up()
-    forward(1000)
-    input("Press ENTER to quit.")
-    bye()
-
 
 """
 Draws one corner of this dope design

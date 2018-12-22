@@ -7,22 +7,13 @@ Revised: 12/22/2018
 The trace for the manual drawing of the second graphic.
 """
 
+from utils import *
+
 from turtle import *
 
-
-def init():
-    """
-    init initializes the drawing by establishing its pre-conditions
-
-    post conditions: turtle is at origin,
-                     turtle is facing right,
-                     turtle is pen-down.
-    """
-
-    speed(0)
-    pencolor('gray')
-    up()
-
+PEN_COLOR = '#CCCCCC'
+BG_COLOR  = '#FFFFFF'
+WIN_SIZE  = 200
 
 def ring(ringSize):
     """
@@ -156,28 +147,12 @@ def drawTraces(length, ringSize, spreadAngle, numTraces):
     for x in range(numSideTraces):
         left(spreadAngle)
 
-
-def finish():
-    """
-    removes the pen from the view
-
-    pre-conditions:  turtle is at the center of the ring,
-                     turtle is facing up,
-                     turtle is pen-up.
-
-    post conditions: turtle is outside of the screen,
-                     turtle is facing up,
-                     turtle is pen-up.
-    """
-
-    fd(1000)
-
 def main():
     """
     draws as much of the design / trace as it can
     """
 
-    init()
+    graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
     ringSize = 25
     length = 200
     spreadAngle = 25
@@ -187,8 +162,7 @@ def main():
 
     ring(ringSize)
     drawTraces(length, ringSize, spreadAngle, numTraces)
-    finish()
-    input("Press ENTER to quit.")
-    bye()
+
+    graphicFin()
 
 main()

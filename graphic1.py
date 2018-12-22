@@ -7,18 +7,13 @@ Revised: 12/22/2018
 The one that started it all.
 """
 
+from utils import *
+
 from turtle import *
 
-def init():
-    """
-    init initializes the drawing by establishing its pre-conditions
-
-    post conditions: turtle is at origin,
-                     is facing right,
-                     is pen-down.
-    """
-
-    speed(0)
+PEN_COLOR = '#FFFFFF'
+BG_COLOR  = '#C1C0CC'
+WIN_SIZE  = 200
 
 def patternFirst():
     """
@@ -217,7 +212,7 @@ def main():
     the main method to draw the design
     """
 
-    init()
+    graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
     up()
     right(90)
     fd(150)
@@ -232,8 +227,6 @@ def main():
         right(30)
         patternSecond()
         right(30)
-    up()
-    fd(1000)
-    input("Press ENTER to quit.")
+    graphicFin()
 
 main()

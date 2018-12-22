@@ -4,28 +4,32 @@ Frank Cwitkowitz
 Created: 10/23/16
 Revised: 12/22/2018
 
-The fourth graphic, also my logo.
+The fourth graphic.
 """
+
+from utils import *
 
 from turtle import *
 from math import *
 
+PEN_COLOR = '#000000'
+BG_COLOR  = '#FFFFFF'
+WIN_SIZE  = 300
 
 """
 Outer function that will handle
 each piece of the project altogether.
 """
 def main(radius, scale, windowXSize):
-    init(windowXSize)
+    graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
+    left(90)
 
     # should begin with the turtle
     # up, centered and facing up.
     draw(radius, scale)
     # test()
 
-    bgcolor('#C1C0CC')
-
-    deInit()
+    graphicFin()
 
 
 """
@@ -137,28 +141,6 @@ def drawLayeredCircle(radius, extent, thickness, color):
     left(90)
     fd((thickness[1] / 2) + (thickness[2] / 2))
     right(90)
-
-
-"""
-Function that sets up the project.
-"""
-def init(windowXSize):
-    setup(windowXSize, windowXSize, None, None)
-    speed(0)
-    pencolor('black')
-    up()
-    left(90)
-
-
-"""
-Function that handles the closing
-cleanup of the project.
-"""
-def deInit():
-    up()
-    forward(1000)
-    input("Press ENTER to quit.")
-    bye()
 
 
 """

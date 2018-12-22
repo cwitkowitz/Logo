@@ -9,7 +9,7 @@ Utilities for my graphic designs. Mostly just common functions for drawing.
 
 from turtle import *
 
-def init():
+def graphicInit(p_col, b_col, winSize):
     """
     init initializes the drawing by establishing its pre-conditions
 
@@ -18,9 +18,29 @@ def init():
                      turtle is pen-down.
     """
 
-    turtle.speed(0)
-    turtle.up()
+    speed(0)
+    pencolor(p_col)
+    bgcolor(b_col)
+    setup(winSize, winSize, None, None)
+    up()
 
+
+def graphicFin():
+    """
+    removes the pen from the view
+
+    pre-conditions:  turtle is facing up,
+                     turtle is pen-up.
+
+    post conditions: turtle is outside of the screen,
+                     turtle is facing up,
+                     turtle is pen-up.
+    """
+
+    up()
+    forward(1000)
+    input("Press ENTER to quit.")
+    bye()
 
 def drawArc(radius, angle, thickness):
     """
@@ -37,15 +57,15 @@ def drawArc(radius, angle, thickness):
 
     """Draw arc"""
     for x in range(angle):
-        turtle.fd(radius-(thickness/2))
-        turtle.down()
-        turtle.fd(thickness)
-        turtle.up()
-        turtle.back(radius+(thickness/2))
-        turtle.right(angle/(angle))
+        fd(radius-(thickness/2))
+        down()
+        fd(thickness)
+        up()
+        back(radius+(thickness/2))
+        right(angle/(angle))
 
     """Reset turtle"""
-    turtle.left(angle)
+    left(angle)
 
 
 def drawHighlightedArc(radius, angle, thickness, highlight):
@@ -61,13 +81,13 @@ def drawHighlightedArc(radius, angle, thickness, highlight):
                      turtle is pen-up.
     """
 
-    turtle.pencolor('red')
+    pencolor('red')
     drawArc(radius-(thickness/2)-(highlight/2), angle, highlight)
-    turtle.pencolor('black')
+    pencolor('black')
     drawArc(radius, angle, thickness)
-    turtle.pencolor('red')
+    pencolor('red')
     drawArc(radius+(thickness/2)+(highlight/2), angle, highlight)
-    turtle.pencolor('black')
+    pencolor('black')
 
 
 def drawLine(length, thickness):
@@ -84,16 +104,16 @@ def drawLine(length, thickness):
     """
 
     for x in range(thickness):
-        turtle.down()
-        turtle.fd(length)
-        turtle.up()
-        turtle.back(length)
-        turtle.right(90)
-        turtle.fd(1)
-        turtle.left(90)
-    turtle.right(90)
-    turtle.back(thickness)
-    turtle.left(90)
+        down()
+        fd(length)
+        up()
+        back(length)
+        right(90)
+        fd(1)
+        left(90)
+    right(90)
+    back(thickness)
+    left(90)
 
 
 def drawHighlightedLine(length, thickness, highlight):
@@ -110,34 +130,19 @@ def drawHighlightedLine(length, thickness, highlight):
     """
 
     drawLine(length, thickness)
-    turtle.left(90)
-    turtle.fd(highlight)
-    turtle.right(90)
-    turtle.pencolor('red')
+    left(90)
+    fd(highlight)
+    right(90)
+    pencolor('red')
     drawLine(length, highlight)
-    turtle.right(90)
-    turtle.fd(thickness+highlight)
-    turtle.left(90)
+    right(90)
+    fd(thickness+highlight)
+    left(90)
     drawLine(length, highlight)
-    turtle.right(90)
-    turtle.back(thickness)
-    turtle.left(90)
-    turtle.pencolor('black')
-
-
-def finish():
-    """
-    removes the pen from the view
-
-    pre-conditions:  turtle is facing up,
-                     turtle is pen-up.
-
-    post conditions: turtle is outside of the screen,
-                     turtle is facing up,
-                     turtle is pen-up.
-    """
-
-    turtle.fd(1000)
+    right(90)
+    back(thickness)
+    left(90)
+    pencolor('black')
 
 def main():
     """
@@ -152,6 +157,4 @@ def main():
     drawHighlightedLine(100, 100, 100)
     finish()
     input("Press ENTER to quit.")
-    turtle.bye()
-
-main()
+    bye()
