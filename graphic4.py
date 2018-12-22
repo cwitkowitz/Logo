@@ -399,5 +399,5 @@ def drawLoop(radius, scale):
     drawLayeredCircle((1.16 * 2.3 * radius), 120, [1, 2, 1], ['black', 'purple', 'black'])
     right(30)
 
-
-main(100, .15, 550)
+if __name__ == '__main__':
+    main(100, .15, 550)

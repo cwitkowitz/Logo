@@ -12,237 +12,142 @@ from utils import *
 from turtle import *
 from math import *
 
-PEN_COLOR = '#000000'
-BG_COLOR  = '#FFFFFF'
-WIN_SIZE  = 300
+PEN_COLOR = '#FFFFFF'
+BG_COLOR  = '#C1C0CC'
+WIN_SIZE  = 500
+
+SCALE = 20
 
 """
 Outer function that will handle
 each piece of the project altogether.
 """
-def main(windowXSize):
+def main(scale):
     graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
-    left(90)
-
-    """
-    This parameter will change the length of the
-    tertiary length if that makes sense
-    """
-    scale = 20
-
-    for i in range(0, 4):
-        squareCorners(scale)
-        left(90)
-        bars(scale)
-
+    drawFigure(scale)
     graphicFin()
 
-
-"""
-Function that will draw a normal,
-straight line with the provided thickness.
-"""
-def drawThickenedLine(length, thickness):
-    pensize(thickness)
-    down()
-    forward(length)
-    up()
-    pensize(1)
-
-
-"""
-Function that will draw a normal,
-straight line with the provided thickness.
-"""
-def drawThickenedCircle(radius, extent, thickness):
-    pensize(thickness)
-    down()
-    circle(radius, extent)
-    up()
-    pensize(1)
-
-"""
-Draws one corner of this dope design
-"""
-def squareCorners(scale):
-
+def drawFigure(scale):
+    # Assuming 45 degree angles, compute the length of the hypotenuse w.r.t. the scale provided
     hyp = scale * sqrt(2)
 
-    fd(scale / 2)
+    # Draw the same repeated design four times
     left(90)
-    fd(scale / 2)
+    for i in range(4):
+        drawSmallCorner(scale, hyp, 1)
+        drawLargeCorner(scale, hyp, 3)
+        drawFrame(scale, hyp, 3)
+        left(90)
+
+def drawSmallCorner(scale, hyp, tness):
+    # Position pen away from center in diagonal direction
+    left(45)
+    fd(1.5 * hyp)
+
+    # Draw small corner close to center
+    drawCorner(scale, hyp, tness, 1, 2, 1)
+
+    # Re-position pen at center of graphic
+    back(1.5 * hyp)
     right(45)
 
-    down()
-    fd(hyp)
+def drawLargeCorner(scale, hyp, tness):
+    # Position pen away from center in diagonal direction
+    left(45)
+    fd(3.5 * hyp)
+
+    # Draw the inside of the larger corner
+    drawCorner(scale, hyp, tness - 1, 2, 3, 1)
+
+    # Position pen for outside of corner while drawing edge
+    drawThickenedLine(hyp, tness - 1)
+
+    # Draw the outside of the larger corner
+    drawCorner(scale, hyp, tness, 4, 5, 1)
+
+    # Re-position pen at center of graphic
+    back(4.5 * hyp)
+    right(45)
+
+def drawFrame(scale, hyp, tness):
+    # Draw long line in between corners and across corners
+    drawThickenedLine(10 * scale, tness)
     left(135)
-    fd(scale)
-    right(90)
-    fd(scale)
-    right(90)
-    fd(scale * 2)
-    up()
-    left(45)
+    drawThickenedLine(4.5 * hyp, tness)
     fd(hyp)
-    down()
-    left(135)
-    fd(scale * 2)
-    right(90)
-    fd(scale)
-    right(90)
-    fd(scale * 3)
-    left(45)
-    back(hyp)
-    left(135)
-    fd(scale * 2)
-    right(45)
-    fd(hyp)
-    right(45)
-    fd(scale)
-    left(45)
-    back(hyp)
-    fd(hyp)
+    drawThickenedLine(4.5 * hyp, tness)
+    back(10 * hyp)
     right(135)
-    fd(scale * 5)
-    up()
+    back(10 * scale)
+
+    # Draw inside lines for both center bars in this quadrant
     left(45)
-    back(hyp * 4)
-
-    down()
-    right(135)
-    fd(scale)
-    left(90)
-    fd(scale)
-    left(90)
-    fd(scale * 2)
-    up()
-    right(45)
-    fd(hyp)
-    down()
-    right(135)
-    fd(scale * 2)
-    left(90)
-    fd(scale)
-    left(90)
-    fd(scale * 3)
-    right(45)
-    back(hyp)
-    right(135)
-    fd(scale * 2)
-    left(45)
-    fd(hyp)
-    left(45)
-    fd(scale)
-    right(45)
-    back(hyp)
-    fd(hyp)
-    left(135)
-    fd(scale * 5)
-    up()
-    right(45)
-    back(hyp * 5)
-    left(45)
-
-    back(scale / 2)
-    right(90)
-    back(scale / 2)
-
-
-"""
-bars qqa
-"""
-def bars(scale):
-
-    hyp = scale * sqrt(2)
-
-    down()
-    fd(scale * 10)
-    right(135)
-    fd(hyp * 4.5)
-    back(hyp * 4.5)
-    right(90)
-    fd(hyp * 4.5)
-    back(hyp * 4.5)
-    right(135)
-    back(scale * 10)
-
-    right(45)
-
-    up()
     fd(hyp / 2)
-    down()
-
-    left(45)
-    fd(scale * 3)
-    right(135)
-    fd(hyp)
-    left(45)
+    right(45)
+    drawThickenedLine(3 * scale, tness)
     fd(scale)
-    left(135)
-    fd(hyp * 2)
+    drawThickenedLine(4 * scale, tness)
+    back(8 * scale)
+    left(90)
+    drawThickenedLine(3 * scale, tness)
+    fd(scale)
+    drawThickenedLine(4 * scale, tness)
+    back(8 * scale)
     right(45)
-    fd(scale * 4)
-    right(135)
-    fd(hyp * 3)
-    back(hyp * 3)
-    left(135)
-    back(scale)
-    right(135)
-    fd(hyp * 2)
-    back(hyp * 2)
-    left(135)
-    back(scale * 3)
-    up()
-    back(scale)
-    down()
-    back(scale * 3)
-    right(45)
-
-    up()
     back(hyp / 2)
-    down()
+    right(45)
 
+    # Prepare to draw inner bar
     left(45)
-
-    left(45)
-
-    up()
     fd(hyp / 2)
-    down()
 
+    # Draw inner bar
     right(45)
-    fd(scale * 3)
+    fd(3 * scale)
     left(135)
+    drawThickenedLine(hyp, tness)
     fd(hyp)
-    right(45)
+    drawThickenedLine(hyp, tness)
+    back(3 * hyp)
+    right(135)
     fd(scale)
-    right(135)
-    fd(hyp * 2)
-    left(45)
-    fd(scale * 4)
     left(135)
-    fd(hyp * 3)
-    back(hyp * 3)
+    drawThickenedLine(4 * hyp, tness)
+    back(4 * hyp)
     right(135)
-    back(scale)
-    left(135)
-    fd(hyp * 2)
-    back(hyp * 2)
-    right(135)
-    back(scale * 3)
-    up()
-    back(scale)
-    down()
-    back(scale * 3)
+    back(4 * scale)
     left(45)
 
-    up()
+    # Reset after drawing inner bar
     back(hyp / 2)
-    down()
-
     right(45)
 
-    up()
+    # Prepare to draw outer bar
+    left(45)
+    fd(hyp / 2)
 
+    # Draw outer bar
+    right(45)
+    fd(7 * scale)
+    left(135)
+    drawThickenedLine(2 * hyp, tness)
+    fd(3 * hyp)
+    drawThickenedLine(2 * hyp, tness)
+    back(7 * hyp)
+    right(135)
+    fd(scale)
+    left(135)
+    drawThickenedLine(3 * hyp, tness)
+    fd(2 * hyp)
+    drawThickenedLine(3 * hyp, tness)
+    back(8 * hyp)
+    right(135)
+    back(8 * scale)
+    left(45)
 
-main(600)
+    # Reset after drawing outer bar
+    back(hyp / 2)
+    right(45)
+
+if __name__ == '__main__':
+    main(SCALE)

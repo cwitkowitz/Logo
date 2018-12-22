@@ -9,6 +9,10 @@ Utilities for my graphic designs. Mostly just common functions for drawing.
 
 from turtle import *
 
+##############################################################################
+# Setup and Cleanup                                                          #
+##############################################################################
+
 def graphicInit(p_col, b_col, winSize):
     """
     init initializes the drawing by establishing its pre-conditions
@@ -42,119 +46,32 @@ def graphicFin():
     input("Press ENTER to quit.")
     bye()
 
-def drawArc(radius, angle, thickness):
-    """
-    draws an arc
+##############################################################################
+# Drawing Tools                                                              #
+##############################################################################
 
-    pre-conditions:  turtle is at the center of the arc,
-                     turtle is facing in the direction of the left part of the arc,
-                     turtle is pen-up.
+"""
+Function that will draw a normal,
+straight line with the provided thickness.
+"""
+def drawThickenedLine(length, thickness):
+    pensize(thickness)
+    down()
+    forward(length)
+    up()
+    pensize(1)
 
-    post conditions: turtle is at the center of the arc,
-                     turtle is facing in the direction of the left part of the arc,
-                     turtle is pen-up.
-    """
-
-    """Draw arc"""
-    for x in range(angle):
-        fd(radius-(thickness/2))
-        down()
-        fd(thickness)
-        up()
-        back(radius+(thickness/2))
-        right(angle/(angle))
-
-    """Reset turtle"""
-    left(angle)
-
-
-def drawHighlightedArc(radius, angle, thickness, highlight):
-    """
-    draws a highlighted arc
-
-    pre-conditions:  turtle is at the center of the arc,
-                     turtle is facing in the direction of the left part of the arc,
-                     turtle is pen-up.
-
-    post conditions: turtle is at the center of the arc,
-                     turtle is facing in the direction of the left part of the arc,
-                     turtle is pen-up.
-    """
-
-    pencolor('red')
-    drawArc(radius-(thickness/2)-(highlight/2), angle, highlight)
-    pencolor('black')
-    drawArc(radius, angle, thickness)
-    pencolor('red')
-    drawArc(radius+(thickness/2)+(highlight/2), angle, highlight)
-    pencolor('black')
-
-
-def drawLine(length, thickness):
-    """
-    draws a thick line
-
-    pre-conditions:  turtle is at the start of the line,
-                     turtle is facing in the direction of the line,
-                     turtle is pen-up.
-
-    post conditions: turtle is at the start of the line,
-                     turtle is facing in the direction of the line,
-                     turtle is pen-up.
-    """
-
-    for x in range(thickness):
-        down()
-        fd(length)
-        up()
-        back(length)
-        right(90)
-        fd(1)
-        left(90)
+def drawCorner(scale, hyp, tness, in_units, out_units, width_units):
+    left(135)
+    drawThickenedLine(in_units * scale, tness)
     right(90)
-    back(thickness)
-    left(90)
-
-
-def drawHighlightedLine(length, thickness, highlight):
-    """
-    draws a thick highlighted line
-
-    pre-conditions:  turtle is at the start of the line,
-                     turtle is facing in the direction of the line,
-                     turtle is pen-up.
-
-    post conditions: turtle is at the start of the line,
-                     turtle is facing in the direction of the line,
-                     turtle is pen-up.
-    """
-
-    drawLine(length, thickness)
-    left(90)
-    fd(highlight)
+    fd(width_units * scale)
     right(90)
-    pencolor('red')
-    drawLine(length, highlight)
+    drawThickenedLine(out_units * scale, tness)
     right(90)
-    fd(thickness+highlight)
-    left(90)
-    drawLine(length, highlight)
+    drawThickenedLine(out_units * scale, tness)
     right(90)
-    back(thickness)
-    left(90)
-    pencolor('black')
-
-def main():
-    """
-    draws as much of the design / trace as it can
-    """
-
-    init()
-
-    ### SEMICICRLE EXAMPLE - turtle.circle(100,180) ###
-    drawHighlightedArc(30, 360, 4, 2)
-    drawHighlightedArc(100, 360, 4, 2)
-    drawHighlightedLine(100, 100, 100)
-    finish()
-    input("Press ENTER to quit.")
-    bye()
+    fd(width_units * scale)
+    right(90)
+    drawThickenedLine(in_units * scale, tness)
+    right(45)

@@ -565,5 +565,5 @@ def fourthQuadrantFill(scale):
 ###  BE VERY CAREFUL WHEN MODIFYING THESE; THEIR SCALING IS INGRANED IN THE FUNCTIONS  ###
 ##########################################################################################
 
-
-main(200, 300)
+if __name__ == '__main__':
+    main(200, 300)
