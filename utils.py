@@ -61,6 +61,19 @@ def drawThickenedLine(length, thickness):
     up()
     pensize(1)
 
+"""
+Function that will draw a normal,
+straight line with the provided thickness.
+It will end where it starts.
+"""
+def drawThickenedCircle(radius, extent, thickness):
+    pensize(thickness)
+    down()
+    circle(radius, extent)
+    up()
+    circle(radius, (360 - extent))
+    pensize(1)
+
 def drawCorner(scale, hyp, tness, in_units, out_units, width_units):
     left(135)
     drawThickenedLine(in_units * scale, tness)

@@ -19,8 +19,7 @@ WIN_SIZE  = 500
 SCALE = 20
 
 """
-Outer function that will handle
-each piece of the project altogether.
+Outer function that will handle each piece of the project altogether.
 """
 def main(scale):
     graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
