@@ -9,41 +9,33 @@ Utilities for my graphic designs. Mostly just common functions for drawing.
 
 from turtle import *
 
+from PIL import Image
+
+import os
+
 ##############################################################################
 # Setup and Cleanup                                                          #
 ##############################################################################
 
 def graphicInit(p_col, b_col, winSize):
-    """
-    init initializes the drawing by establishing its pre-conditions
-
-    post conditions: turtle is at origin,
-                     turtle is facing right,
-                     turtle is pen-down.
-    """
-
     speed(0)
     pencolor(p_col)
-    bgcolor(b_col)
     setup(winSize, winSize, None, None)
     up()
+    fd(winSize)
+    left(90)
+    drawFilledCircle(winSize, 360, 1, b_col)
+    right(90)
+    back(winSize)
 
-
-def graphicFin():
-    """
-    removes the pen from the view
-
-    pre-conditions:  turtle is facing up,
-                     turtle is pen-up.
-
-    post conditions: turtle is outside of the screen,
-                     turtle is facing up,
-                     turtle is pen-up.
-    """
-
-    up()
-    forward(1000)
+def graphicFin(img_name):
+    hideturtle()
     input("Press ENTER to quit.")
+    ps_path = '../output/postscript/' + img_name + '.eps'
+    png_path = '../output/imgs/' + img_name + '.png'
+    getscreen().getcanvas().postscript(file = ps_path)
+    img = Image.open(ps_path)
+    img.save(png_path, 'png')
     bye()
 
 ##############################################################################
@@ -73,6 +65,12 @@ def drawThickenedCircle(radius, extent, thickness):
     up()
     circle(radius, (360 - extent))
     pensize(1)
+
+def drawFilledCircle(radius, extent, thickness, col):
+    fillcolor(col)
+    begin_fill()
+    drawThickenedCircle(radius, extent, thickness)
+    end_fill()
 
 def drawCorner(scale, hyp, tness, in_units, out_units, width_units):
     left(135)

@@ -24,7 +24,7 @@ Outer function that will handle each piece of the project altogether.
 def main(scale):
     graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
     drawFigure(scale)
-    graphicFin()
+    graphicFin('graphic5')
 
 def drawFigure(scale):
     # Assuming 45 degree angles, compute the length of the hypotenuse w.r.t. the scale provided
@@ -33,7 +33,7 @@ def drawFigure(scale):
     # Draw the same repeated design four times
     left(90)
     for i in range(4):
-        drawSmallCorner(scale, hyp, 1)
+        drawSmallCorner(scale, hyp, 2)
         drawLargeCorner(scale, hyp, 3)
         drawFrame(scale, hyp, 3)
         left(90)
