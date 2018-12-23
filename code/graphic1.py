@@ -13,119 +13,132 @@ from turtle import *
 
 PEN_COLOR = '#FFFFFF'
 BG_COLOR  = '#C1C0CC'
-WIN_SIZE  = 200
+WIN_SIZE  = 500
 
-def patternFirst():
-    """
-    the method to draw the triangular spike with all detail
-    """
+SCALE = 150
 
-    down()
+"""
+Outer function that will handle each piece of the project altogether.
+"""
+def main():
+    graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
+    drawFigure(SCALE)
+    graphicFin('graphic1')
+
+def drawFigure(scale):
+    # Draw the large center circle
+    right(90)
+    fd(scale)
+    left(90)
+    drawThickenedCircle(scale, 360, 1)
+    left(90)
+    fd(scale)
+
+    # Draw the same repeated design six times
+    for i in range(0, 6):
+        drawFirstVariant(scale, 2)
+        right(30)
+        drawSecondVariant(scale, 1)
+        right(30)
+
+def drawFirstVariant(scale, tness):
+    # Draw the inside and outside spike outline
     right(15)
-    fd(150)
+    drawThickenedLine(scale, tness)
     left(30)
-    fd(150)
-    back(150)
-    right(30)
-    back(150)
+    drawThickenedLine(scale, tness)
+    left(150)
+    drawThickenedLine(scale, tness)
     left(30)
-    fd(150)
-    right(30)
-    fd(150)
-    back(150)
-    left(30)
-    back(150)
-    right(15)
-    fd(150)
-    back(60.28856829)
+    drawThickenedLine(scale, tness)
+    left(165)
+
+    # Draw the center line of the variant and the inner circle
+    drawThickenedLine(scale, tness)
+    innerCircleDiameter = 60.28856829 # TODO - figure out how this was calculated
+    back(innerCircleDiameter)
     right(90)
-    circle(30.14428414)
+    drawThickenedCircle(innerCircleDiameter / 2, 360, tness)
     left(90)
-    back(89.71143171)
-    fd(70)
+    back(scale - innerCircleDiameter)
+
+    # Draw overlapping squares
+    fd(7 * scale / 15)
     left(45)
-    fd(15)
+    drawThickenedLine(scale / 10, tness - 1)
     right(90)
-    fd(15)
+    drawThickenedLine(scale / 10, tness - 1)
     right(90)
-    fd(15)
+    drawThickenedLine(scale / 10, tness - 1)
     right(90)
-    fd(15)
+    drawThickenedLine(scale / 10, tness - 1)
     right(135)
-    fd(10)
+    fd(scale / 15)
     left(45)
-    fd(15)
+    drawThickenedLine(scale / 10, tness - 1)
     right(90)
-    fd(15)
+    drawThickenedLine(scale / 10, tness - 1)
     right(90)
-    fd(15)
+    drawThickenedLine(scale / 10, tness - 1)
     right(90)
-    fd(15)
+    drawThickenedLine(scale / 10, tness - 1)
     right(135)
-    back(80)
-    fd(150)
+    back(8 * scale / 15)
+
+    # Draw the three outer circles
+    fd(scale)
     right(90)
-    circle(29.7)
-    up()
+    firstOuterCircleRadius = 29.7
+    secondOuterCircleRadius = 15.9
+    thirdOuterCircleRadius = 9.2
+    drawThickenedCircle(firstOuterCircleRadius, 360, tness - 1)
     left(90)
-    fd(59.4)
+    fd(2 * firstOuterCircleRadius)
     right(90)
-    down()
-    circle(15.9)
+    drawThickenedCircle(secondOuterCircleRadius, 360, tness - 1)
     left(90)
-    up()
-    fd(31.8)
+    fd(2 * secondOuterCircleRadius)
     right(90)
-    down()
-    circle(9.2)
+    drawThickenedCircle(thirdOuterCircleRadius, 360, tness - 1)
     left(90)
-    up()
     back(241.2)
+
+    # Draw diamonds linking circles
     fd(179.7)
     left(15)
-    down()
-    fd(23.60429691)
+    drawThickenedLine(23.60429691, tness - 1)
     right(30)
-    fd(23.60429691)
+    drawThickenedLine(23.60429691, tness - 1)
     right(150)
-    fd(23.60429691)
+    drawThickenedLine(23.60429691, tness - 1)
     right(30)
-    fd(23.60429691)
+    drawThickenedLine(23.60429691, tness - 1)
     right(165)
-    up()
     fd(45.6)
     left(15)
-    down()
-    fd(12.99271607)
+    drawThickenedLine(12.99271607, tness - 1)
     right(30)
-    fd(12.99271607)
+    drawThickenedLine(12.99271607, tness - 1)
     right(150)
-    fd(12.99271607)
+    drawThickenedLine(12.99271607, tness - 1)
     right(30)
-    fd(12.99271607)
+    drawThickenedLine(12.99271607, tness - 1)
     right(165)
-    up()
     back(225.3)
+
+    # Draw two stems from center of inner circle
     fd(119.8557159)
     right(82.36925982)
-    down()
-    fd(75.67010114)
-    right(75)
-    fd(75.67010114)
-    left(90-82.36925982+90)
-    up()
-    right(90-82.36925982+90)
+    drawThickenedLine(75.67010114, tness - 1)
     back(75.67010114)
-    left(75)
+    left(2 * 82.36925982)
+    drawThickenedLine(75.67010114, tness - 1)
     back(75.67010114)
-    left(82.36925982)
+    right(82.36925982)
     back(119.8557159)
 
-def patternSecond():
-    """
-    the method to fill in the remaining slices
-    """
-
+def drawSecondVariant(scale, tness):
+    # Draw the larger circle of this variant
     fd(150-38)
     right(90)
     down()
@@ -133,6 +146,8 @@ def patternSecond():
     up()
     left(90)
     back(150-38)
+
+    # Draw left and right connection to other variant
     fd(150)
     left(120-66.20602311)
     down()
@@ -146,6 +161,8 @@ def patternSecond():
     back(185.8970512)
     left(120-66.20602311)
     back(150)
+
+    # Draw inner "V"
     fd(30)
     left(15)
     down()
@@ -157,6 +174,8 @@ def patternSecond():
     up()
     left(15)
     back(30)
+
+    # Draw middle "V" point
     fd(80)
     right(30)
     down()
@@ -169,6 +188,7 @@ def patternSecond():
     right(30)
     back(80)
 
+    # Draw outer "V" point
     fd(100)
     right(30)
     down()
@@ -181,6 +201,7 @@ def patternSecond():
     right(30)
     back(100)
 
+    # Draw inner "V" point
     fd(60)
     right(30)
     down()
@@ -193,6 +214,7 @@ def patternSecond():
     right(30)
     back(60)
 
+    # Draw circle with "V"
     fd(112)
     right(90)
     down()
@@ -206,28 +228,6 @@ def patternSecond():
     up()
     left(25)
     back(112)
-
-def main():
-    """
-    the main method to draw the design
-    """
-
-    graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
-    up()
-    right(90)
-    fd(150)
-    left(90)
-    down()
-    circle(150)
-    up()
-    left(90)
-    fd(150)
-    for i in range(0, 6):
-        patternFirst()
-        right(30)
-        patternSecond()
-        right(30)
-    graphicFin()
 
 if __name__ == '__main__':
     main()

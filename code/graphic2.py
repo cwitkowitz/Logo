@@ -21,12 +21,12 @@ WING_ANG  = 25
 WING_NUM  = 5 # Should be a odd integer
 
 """
-Outer function that will handle each piece of the project altogether.
+Outer function that will handle each piece of the project altogether
 """
 def main():
     graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
     drawFigure()
-    graphicFin()
+    graphicFin('graphic2')
 
 def drawFigure():
     drawRing(RING_SIZE, 1)
