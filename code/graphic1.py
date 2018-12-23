@@ -15,7 +15,8 @@ PEN_COLOR = '#FFFFFF'
 BG_COLOR  = '#C1C0CC'
 WIN_SIZE  = 500
 
-SCALE = 150
+SCALE     = 100
+FILL_SHPS = 1
 
 """
 Outer function that will handle each piece of the project altogether.
@@ -38,10 +39,23 @@ def drawFigure(scale):
     for i in range(0, 6):
         drawFirstVariant(scale, 2)
         right(30)
-        drawSecondVariant(scale, 1)
+        drawSecondVariant(scale, 2)
         right(30)
 
 def drawFirstVariant(scale, tness):
+    # TODO - I am not sure how I calculated these lengths and angles...
+    #        My calculations are buried in a journal somewhere and I will
+    #        update these when I find them. For now the magic number are just
+    #        used to scale the parameters.
+    innerCircleDiameter = 6.028856829 * scale / 15
+    firstOuterCircleRadius = 2.97 * scale / 15
+    secondOuterCircleRadius = 1.59 * scale / 15
+    thirdOuterCircleRadius = 0.92 * scale / 15
+    largeDiamondSide = 2.360429691 * scale / 15
+    smallDiamondSide = 1.299271607 * scale / 15
+    stemLineLength = 7.567010114 * scale / 15
+    stemLineAngle = 82.36925982
+
     # Draw the inside and outside spike outline
     right(15)
     drawThickenedLine(scale, tness)
@@ -55,7 +69,6 @@ def drawFirstVariant(scale, tness):
 
     # Draw the center line of the variant and the inner circle
     drawThickenedLine(scale, tness)
-    innerCircleDiameter = 60.28856829 # TODO - figure out how this was calculated
     back(innerCircleDiameter)
     right(90)
     drawThickenedCircle(innerCircleDiameter / 2, 360, tness)
@@ -65,6 +78,9 @@ def drawFirstVariant(scale, tness):
     # Draw overlapping squares
     fd(7 * scale / 15)
     left(45)
+    if FILL_SHPS:
+        fillcolor(PEN_COLOR)
+        begin_fill()
     drawThickenedLine(scale / 10, tness - 1)
     right(90)
     drawThickenedLine(scale / 10, tness - 1)
@@ -82,152 +98,153 @@ def drawFirstVariant(scale, tness):
     drawThickenedLine(scale / 10, tness - 1)
     right(90)
     drawThickenedLine(scale / 10, tness - 1)
+    if FILL_SHPS:
+        end_fill()
     right(135)
     back(8 * scale / 15)
 
     # Draw the three outer circles
     fd(scale)
     right(90)
-    firstOuterCircleRadius = 29.7
-    secondOuterCircleRadius = 15.9
-    thirdOuterCircleRadius = 9.2
-    drawThickenedCircle(firstOuterCircleRadius, 360, tness - 1)
+    drawThickenedCircle(firstOuterCircleRadius, 360, tness)
     left(90)
     fd(2 * firstOuterCircleRadius)
     right(90)
-    drawThickenedCircle(secondOuterCircleRadius, 360, tness - 1)
+    drawThickenedCircle(secondOuterCircleRadius, 360, tness)
     left(90)
     fd(2 * secondOuterCircleRadius)
     right(90)
-    drawThickenedCircle(thirdOuterCircleRadius, 360, tness - 1)
+    drawThickenedCircle(thirdOuterCircleRadius, 360, tness)
     left(90)
-    back(241.2)
+    back(scale + 2 * firstOuterCircleRadius + 2 * secondOuterCircleRadius)
 
     # Draw diamonds linking circles
-    fd(179.7)
+    fd(scale + firstOuterCircleRadius)
     left(15)
-    drawThickenedLine(23.60429691, tness - 1)
+    if FILL_SHPS:
+        fillcolor(PEN_COLOR)
+        begin_fill()
+    drawThickenedLine(largeDiamondSide, tness - 1)
     right(30)
-    drawThickenedLine(23.60429691, tness - 1)
+    drawThickenedLine(largeDiamondSide, tness - 1)
     right(150)
-    drawThickenedLine(23.60429691, tness - 1)
+    drawThickenedLine(largeDiamondSide, tness - 1)
     right(30)
-    drawThickenedLine(23.60429691, tness - 1)
+    drawThickenedLine(largeDiamondSide, tness - 1)
     right(165)
-    fd(45.6)
+    fd(firstOuterCircleRadius + secondOuterCircleRadius)
     left(15)
-    drawThickenedLine(12.99271607, tness - 1)
+    drawThickenedLine(smallDiamondSide, tness - 1)
     right(30)
-    drawThickenedLine(12.99271607, tness - 1)
+    drawThickenedLine(smallDiamondSide, tness - 1)
     right(150)
-    drawThickenedLine(12.99271607, tness - 1)
+    drawThickenedLine(smallDiamondSide, tness - 1)
     right(30)
-    drawThickenedLine(12.99271607, tness - 1)
+    drawThickenedLine(smallDiamondSide, tness - 1)
+    if FILL_SHPS:
+        end_fill()
     right(165)
-    back(225.3)
+    back(scale + 2 * firstOuterCircleRadius + secondOuterCircleRadius)
 
     # Draw two stems from center of inner circle
-    fd(119.8557159)
-    right(82.36925982)
-    drawThickenedLine(75.67010114, tness - 1)
-    back(75.67010114)
-    left(2 * 82.36925982)
-    drawThickenedLine(75.67010114, tness - 1)
-    back(75.67010114)
-    right(82.36925982)
-    back(119.8557159)
+    fd(scale - innerCircleDiameter / 2)
+    right(stemLineAngle)
+    drawThickenedLine(stemLineLength, tness - 1)
+    back(stemLineLength)
+    left(2 * stemLineAngle)
+    drawThickenedLine(stemLineLength, tness - 1)
+    back(stemLineLength)
+    right(stemLineAngle)
+    back(scale - innerCircleDiameter / 2)
 
 def drawSecondVariant(scale, tness):
+    # TODO - I am not sure how I calculated these lengths and angles...
+    #        My calculations are buried in a journal somewhere and I will
+    #        update these when I find them. For now the magic number are just
+    #        used to scale the parameters.
+    largeCircleRadius = 3.8 * scale / 15
+    wingAngle = 120 - 66.20602311
+    wingLength = 18.58970512 * scale / 15
+    innerVLength = 1.1 * scale / 15
+    middleVLength = 1.8 * scale / 15
+    outerVLength = 2.6 * scale / 15
+    smallCircleRadius = 1.65 * scale / 15
+    smallCircleChord = 2.9 * scale / 15
+
     # Draw the larger circle of this variant
-    fd(150-38)
+    fd(scale - largeCircleRadius)
     right(90)
-    down()
-    circle(38)
-    up()
+    drawThickenedCircle(largeCircleRadius, 360, tness)
     left(90)
-    back(150-38)
+    back(scale - largeCircleRadius)
 
     # Draw left and right connection to other variant
-    fd(150)
-    left(120-66.20602311)
-    down()
-    fd(185.8970512)
-    up()
-    back(185.8970512)
-    right((120-66.20602311)*2)
-    down()
-    fd(185.8970512)
-    up()
-    back(185.8970512)
-    left(120-66.20602311)
-    back(150)
+    fd(scale)
+    left(wingAngle)
+    drawThickenedLine(wingLength, tness)
+    back(wingLength)
+    right(2 * wingAngle)
+    drawThickenedLine(wingLength, tness)
+    back(wingLength)
+    left(wingAngle)
+    back(scale)
 
     # Draw inner "V"
-    fd(30)
+    fd(3 * scale / 15)
     left(15)
-    down()
-    fd(70)
-    back(70)
+    drawThickenedLine(7 * scale / 15, tness - 1)
+    back(7 * scale / 15)
     right(30)
-    fd(70)
-    back(70)
-    up()
+    drawThickenedLine(7 * scale / 15, tness - 1)
+    back(7 * scale / 15)
     left(15)
-    back(30)
+    back(3 * scale / 15)
 
     # Draw middle "V" point
-    fd(80)
+    fd(8 * scale / 15)
     right(30)
-    down()
-    back(18)
-    fd(18)
+    back(middleVLength)
+    drawThickenedLine(middleVLength, tness)
     left(60)
-    back(18)
-    fd(18)
-    up()
+    back(middleVLength)
+    drawThickenedLine(middleVLength, tness)
     right(30)
-    back(80)
+    back(8 * scale / 15)
 
     # Draw outer "V" point
-    fd(100)
+    fd(10 * scale / 15)
     right(30)
-    down()
-    back(26)
-    fd(26)
+    back(outerVLength)
+    drawThickenedLine(outerVLength, tness)
     left(60)
-    back(26)
-    fd(26)
-    up()
+    back(outerVLength)
+    drawThickenedLine(outerVLength, tness)
     right(30)
-    back(100)
+    back(10 * scale / 15)
 
     # Draw inner "V" point
-    fd(60)
+    fd(6 * scale / 15)
     right(30)
-    down()
-    back(11)
-    fd(11)
+    back(innerVLength)
+    drawThickenedLine(innerVLength, tness)
     left(60)
-    back(11)
-    fd(11)
-    up()
+    back(innerVLength)
+    drawThickenedLine(innerVLength, tness)
     right(30)
-    back(60)
+    back(6 * scale / 15)
 
     # Draw circle with "V"
-    fd(112)
+    fd(scale - largeCircleRadius)
     right(90)
-    down()
-    circle(16.5)
+    drawThickenedCircle(smallCircleRadius, 360, tness)
     left(115)
-    fd(29)
-    back(29)
+    drawThickenedLine(smallCircleChord, tness - 1)
+    back(smallCircleChord)
     right(50)
-    fd(29)
-    back(29)
-    up()
+    drawThickenedLine(smallCircleChord, tness - 1)
+    back(smallCircleChord)
     left(25)
-    back(112)
+    back(scale - largeCircleRadius)
 
 if __name__ == '__main__':
     main()
