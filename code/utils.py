@@ -11,8 +11,6 @@ from turtle import *
 
 from PIL import Image
 
-import os
-
 ##############################################################################
 # Setup and Cleanup                                                          #
 ##############################################################################
@@ -53,6 +51,13 @@ def drawThickenedLine(length, thickness):
     up()
     pensize(1)
 
+def drawThickenedArc(radius, extent, thickness):
+    pensize(thickness)
+    down()
+    circle(radius, extent)
+    up()
+    pensize(1)
+
 """
 Function that will draw a normal,
 straight line with the provided thickness.
@@ -86,3 +91,10 @@ def drawCorner(scale, hyp, tness, in_units, out_units, width_units):
     right(90)
     drawThickenedLine(in_units * scale, tness)
     right(45)
+
+def shapeFillStart(col):
+    fillcolor(col)
+    begin_fill()
+
+def shapeFillEnd():
+    end_fill()
