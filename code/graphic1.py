@@ -15,6 +15,7 @@ from math import *
 PEN_COLOR = '#000000'
 BG_COLOR  = '#C1C0CC'
 WIN_SIZE  = 500
+SAVE_IMG  = 1
 FILL_SHPS = 1
 
 SCALE     = 115
@@ -27,7 +28,7 @@ Outer function that will handle each piece of the project altogether.
 def main():
     graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
     drawFigure(SCALE)
-    graphicFin('graphic1')
+    graphicFin('graphic1', SAVE_IMG)
 
 def drawFigure(scale):
     # Draw the large center circle

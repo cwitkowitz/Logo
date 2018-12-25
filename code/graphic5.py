@@ -12,11 +12,12 @@ from utils import *
 from turtle import *
 from math import *
 
-PEN_COLOR = '#FFFFFF'
+PEN_COLOR = '#000000'
 BG_COLOR  = '#C1C0CC'
 WIN_SIZE  = 500
+SAVE_IMG  = 1
 
-SCALE = 35
+SCALE = 20
 
 """
 Outer function that will handle each piece of the project altogether
@@ -24,7 +25,7 @@ Outer function that will handle each piece of the project altogether
 def main(scale):
     graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
     drawFigure(scale)
-    graphicFin('graphic5')
+    graphicFin('graphic5', SAVE_IMG)
 
 def drawFigure(scale):
     # Assuming 45 degree angles, compute the length of the hypotenuse w.r.t. the scale provided

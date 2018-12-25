@@ -7,51 +7,32 @@ Revised: 12/22/2018
 The third graphic, also my logo.
 """
 
-"""
-###### SIDEBAR ######
-Apparently, I do not know my geometry very well and muddled up
-the semantics and modularization of the code, but it works.
-I am not complaining. I'll get em' next time.
-#####################
-"""
-
 from utils import *
 
 from turtle import *
 from math import *
 
 PEN_COLOR = '#000000'
-BG_COLOR  = '#FFFFFF'
-WIN_SIZE  = 300
+BG_COLOR  = '#C1C0CC'
+WIN_SIZE  = 500
+SAVE_IMG  = 1
+
+SCALE     = 225
 
 """
-Outer function that will handle
-each piece of the project altogether.
+Outer function that will handle each piece of the project altogether
 """
-def main(height, windowXSize):
+def main():
     graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
+    drawFigure(SCALE)
+    graphicFin('graphic3', SAVE_IMG)
+
+def drawFigure(scale):
     left(90)
-
-    # These should begin with the
-    # turtle up, centered and facing up.
-    ### Be weary, there are a lot of things to
-    ### change in order to re-scale these outlines
-    firstQuadrant(height)
-    thirdQuadrant(height)
-    secondQuadrant(height)
-    fourthQuadrant(height)
-    """
-    right(90)
-    drawThickenedLine(500, 1)
-    back(500)
-    left(180)
-    drawThickenedLine(500, 1)
-    back(500)
-    right(90)
-    """
-
-    graphicFin()
-
+    firstQuadrant(scale)
+    thirdQuadrant(scale)
+    secondQuadrant(scale)
+    fourthQuadrant(scale)
 
 """
 Function that will draw a normal,
@@ -566,4 +547,4 @@ def fourthQuadrantFill(scale):
 ##########################################################################################
 
 if __name__ == '__main__':
-    main(200, 300)
+    main()

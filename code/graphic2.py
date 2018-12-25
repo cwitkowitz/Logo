@@ -14,6 +14,7 @@ from turtle import *
 PEN_COLOR = '#CCCCCC'
 BG_COLOR  = '#FFFFFF'
 WIN_SIZE  = 500
+SAVE_IMG  = 1
 
 RING_SIZE = 25
 WING_LEN  = 200
@@ -26,7 +27,7 @@ Outer function that will handle each piece of the project altogether
 def main():
     graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
     drawFigure()
-    graphicFin('graphic2')
+    graphicFin('graphic2', SAVE_IMG)
 
 def drawFigure():
     drawRing(RING_SIZE, 1)

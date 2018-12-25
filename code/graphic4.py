@@ -12,165 +12,62 @@ from utils import *
 from turtle import *
 from math import *
 
-PEN_COLOR = '#000000'
-BG_COLOR  = '#FFFFFF'
-WIN_SIZE  = 300
+PEN_COLOR = '#FFFFFF'
+BG_COLOR  = '#C1C0CC'
+WIN_SIZE  = 500
+SAVE_IMG  = 1
+
+RADIUS    = 100
+SCALE = 0.15
+SEC_COLOR = 'purple'
+CIRC_COLS = ['black', 'purple', 'black', BG_COLOR]
 
 """
-Outer function that will handle
-each piece of the project altogether.
+Outer function that will handle each piece of the project altogether.
 """
-def main(radius, scale, windowXSize):
+def main():
     graphicInit(PEN_COLOR, BG_COLOR, WIN_SIZE)
-    left(90)
+    drawFigure(RADIUS, SCALE)
+    graphicFin('graphic4', SAVE_IMG)
 
-    # should begin with the turtle
-    # up, centered and facing up.
-    draw(radius, scale)
-    # test()
-
-    graphicFin()
-
-
-"""
-Function to modularize main, in order to
-provide an easy way to mess around.
-"""
-def draw(radius, scale):
-    # Radius in scale have different meanings here
+def drawFigure(radius, scale):
+    radius = 100
+    left(120)
     drawCenterPiece(radius)
     right(80)
     drawAppendage(radius, scale)
     right(180)
     drawAppendage(radius, scale)
     right(100)
-    """
-    ### Just for fun! ###
-    left(10)
-    drawLoopsPlural(radius, scale)
-    right(10)
-    """
-
-
-"""
-Function that will draw a normal,
-straight line with the provided thickness.
-"""
-def drawThickenedLine(length, thickness):
-    pensize(thickness)
-    down()
-    forward(length)
-    up()
-    pensize(1)
-
-"""
-Function that draws a colored thickened line.
-"""
-def drawColoredLined(length, thickness, color):
-    pencolor(color)
-    drawThickenedLine(length, thickness)
-    pencolor('black')
-
-
-"""
-Function to cover a line with
-customizable thickness and color.
-"""
-def drawLayeredLine(length, thickness, color):
-    if thickness[1] != 0:
-        drawColoredLined(length, thickness[1], color[1])
-    back(length)
-    left(90)
-    fd((thickness[1] / 2) + (thickness[0] / 2))
-    right(90)
-    if thickness[0] != 0:
-        drawColoredLined(length, thickness[0], color[0])
-    back(length)
-    right(90)
-    fd((thickness[1]) + (thickness[0] / 2) + (thickness[2] / 2))
-    left(90)
-    if thickness[2] != 0:
-        drawColoredLined(length, thickness[2], color[2])
-    back(length)
-    left(90)
-    fd((thickness[1] / 2) + (thickness[2] / 2))
-    right(90)
-    fd(length)
-
-
-"""
-Function that will draw a normal,
-straight line with the provided thickness.
-It will end where it starts.
-"""
-def drawThickenedCircle(radius, extent, thickness):
-    pensize(thickness)
-    down()
-    circle(radius, extent)
-    up()
-    circle(radius, (360 - extent))
-    pensize(1)
-
-
-"""
-Function that draws a colored thickened circle.
-"""
-def drawColoredCircle(radius, extent, thickness, color):
-    pencolor(color)
-    drawThickenedCircle(radius, extent, thickness)
-    pencolor('black')
-
-
-"""
-Function to cover a circle with
-customizable thickness and color.
-"""
-def drawLayeredCircle(radius, extent, thickness, color):
-    if thickness[1] != 0:
-        drawColoredCircle(radius, extent, thickness[1], color[1])
-    right(90)
-    back((thickness[1] / 2) + (thickness[0] / 2))
-    left(90)
-    if thickness[0] != 0:
-        drawColoredCircle((radius - (thickness[1] / 2) - (thickness[0] / 2)), extent, thickness[0], color[0])
-    left(90)
-    back((thickness[1]) + (thickness[0] / 2) + (thickness[2] / 2))
-    right(90)
-    if thickness[2] != 0:
-        drawColoredCircle((radius + (thickness[1] / 2) + (thickness[2] / 2)), extent, thickness[2], color[2])
-    left(90)
-    fd((thickness[1] / 2) + (thickness[2] / 2))
-    right(90)
-
 
 """
 Function to draw the middle circle and
 any fills.
 """
 def drawCenterPiece(radius):
-    # Small inner circle
-    right(90)
-    fd(.35 * radius)
-    left(90)
-    drawLayeredCircle((.35 * radius), 360, [2, 3, 2], ['black', 'purple', 'black'])
-    right(90)
-    back(.35 * radius)
-    left(90)
-
     # Big outer circle
     right(90)
     fd(radius)
     left(90)
-    drawLayeredCircle(radius, 360, [2, 3, 2], ['black', 'purple', 'black'])
+    drawLayeredCircle(radius, 360, [2, 3, 2], CIRC_COLS)
     right(90)
     back(radius)
     left(90)
 
+    # Small inner circle
+    right(90)
+    fd(.35 * radius)
+    left(90)
+    drawLayeredCircle((.35 * radius), 360, [2, 3, 2], CIRC_COLS)
+    right(90)
+    back(.35 * radius)
+    left(90)
+
+    # Draw the semi-circle lines at four different lengths
     drawOuterFill(radius, .82)
     drawCenterFill(radius, .67)
     drawInnerFill(radius, .48)
     drawInnerCircleFill(radius, .2)
-
 
 """
 Function to draw the tracings of the
@@ -201,7 +98,6 @@ def drawOuterFill(radius, scale):
     back(scale * radius)
     right(105)
 
-
 """
 Function to draw the tracings of the
 center fill.
@@ -230,7 +126,6 @@ def drawCenterFill(radius, scale):
     right(90)
     back(scale * radius)
     right(62)
-
 
 """
 Function to draw the tracings of the
@@ -275,16 +170,15 @@ def drawInnerCircleFill(radius, scale):
     back(scale * radius)
     right(140)
 
-
 """
 Function to draw a triangular appendage.
 """
 def drawAppendage(scale, radius):
     # Straight line and mini circle
-    drawLayeredLine((2.3 * scale), [1, 2, 1], ['black', 'purple', 'black'])
+    drawLayeredLine((2.3 * scale), [1, 2, 1], CIRC_COLS)
     fd(radius * scale)
     left(90)
-    drawLayeredCircle((radius * scale), 360, [1, 2, 1], ['black', 'purple', 'black'])
+    drawLayeredCircle((radius * scale), 360, [1, 2, 1], CIRC_COLS)
     right(90)
     back(radius * scale)
 
@@ -296,18 +190,17 @@ def drawAppendage(scale, radius):
     fd(.65 * scale)
     right(90)
     right(90 - degrees(atan((2.3 * scale) / (.65 * scale))))
-    drawLayeredLine(((.65 * scale) / cos(radians(degrees(atan((2.3 * scale) / (.65 * scale)))))), [1, 2, 1], ['black', 'purple', 'black'])
+    drawLayeredLine(((.65 * scale) / cos(radians(degrees(atan((2.3 * scale) / (.65 * scale)))))), [1, 2, 1], CIRC_COLS)
     back((.65 * scale) / cos(radians(degrees(atan((2.3 * scale) / (.65 * scale))))))
     left(90 - degrees(atan((2.3 * scale) / (.65 * scale))))
     left(90)
     back(2 * (.65 * scale))
     right(degrees(atan((2.3 * scale) / (.65 * scale))))
-    drawLayeredLine(((.65 * scale) / cos(radians(degrees(atan((2.3 * scale) / (.65 * scale)))))), [1, 2, 1], ['black', 'purple', 'black'])
+    drawLayeredLine(((.65 * scale) / cos(radians(degrees(atan((2.3 * scale) / (.65 * scale)))))), [1, 2, 1], CIRC_COLS)
     back((.65 * scale) / cos(radians(degrees(atan((2.3 * scale) / (.65 * scale))))))
     left(degrees(atan((2.3 * scale) / (.65 * scale))))
     fd(.65 * scale)
     right(90)
-
 
 """
 Draws the fills inside of the appendages.
@@ -369,7 +262,6 @@ def drawFills(scale):
 
     right(180)
 
-
 """
 Draws two loops around the center figure.
 """
@@ -390,14 +282,13 @@ def drawLoopsPlural(radius, scale):
     back(2.3 * radius)
     left(180)
 
-
 """
 Draws one loop around the center figure.
 """
 def drawLoop(radius, scale):
     left(30)
-    drawLayeredCircle((1.16 * 2.3 * radius), 120, [1, 2, 1], ['black', 'purple', 'black'])
+    drawLayeredCircle((1.16 * 2.3 * radius), 120, [1, 2, 1], CIRC_COLS)
     right(30)
 
 if __name__ == '__main__':
-    main(100, .15, 550)
+    main()
