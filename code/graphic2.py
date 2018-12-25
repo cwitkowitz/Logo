@@ -30,6 +30,7 @@ def main():
     graphicFin('graphic2', SAVE_IMG)
 
 def drawFigure():
+    # TODO - not vertically centered
     drawRing(RING_SIZE, 1)
 
     numSideTraces = WING_NUM // 2
